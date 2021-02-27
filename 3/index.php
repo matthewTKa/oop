@@ -3,6 +3,7 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/3/User.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/3/Worker.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/3/Student.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/3/Driver.php';
 
 echo '<h1>Задание 1</h1><br>';
 /*
@@ -41,4 +42,20 @@ $matthew->setAge(19);
 $matthew->setScholarship(560);
 $matthew->setCourse(4);
 
-echo 'Студент ' . $matthew->getName() . ' обучается на ' . $matthew->getCourse() . '-м курсе. Стипендия: ' . $matthew->getScholarship() . ' рублей.';
+echo 'Студент ' . $matthew->getName() . ' обучается на ' . $matthew->getCourse() . '-м курсе. Стипендия: ' . $matthew->getScholarship() . ' рублей.<br>';
+
+/*
+Сделайте класс Driver (Водитель),
+который будет наследоваться от класса Worker из предыдущей задачи.
+Этот метод должен вносить следующие private поля: водительский стаж,
+категория вождения (A, B, C)
+*/
+
+$alex = new Driver();
+$alex->setName('Александр');
+$alex->setAge(40);
+$alex->setSalary(30000);
+$alex->setExperience(15);
+$alex->setCategory('B');
+
+echo 'Водитель ' . $alex->getName() . ' в возрасте ' . $alex->getAge() . ' лет, имеющий категорию: "' . $alex->getCategory() . '" с опытом вождения более ' . $alex->getExperience() . ' лет, врезался в столб';
