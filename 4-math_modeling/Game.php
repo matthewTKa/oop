@@ -5,14 +5,9 @@ class Game{
     // Array of game
     private $game;
 
-    // count game iterations
-    private $iterations;
-
     // Array nums of rows
     private $minRows;
     private $maxOf_A_Player;
-    // Array nums of columns
-    private $maxColumns;
 
     public function __construct(array $game, $iterations)
     {
@@ -20,35 +15,40 @@ class Game{
         $this->iterations = $iterations;
     }
 
-    protected function result(){
-        $i = 1;
-        foreach($this->game as $row){
-            echo 'A' . $i . ': ';
-            foreach($row as $el){
-                echo $el . '|';
+    private function makeRow($row, $i){
+        foreach($row as $el){
+            if($this->maxOf_A_Player === $i){
+                echo '<td><b>' . $el . '</b></td>';
             }
-            echo '<br>';
-            $i++;
+            else{
+                echo '<td>' . $el . '</td>';
+            }
         }
     }
 
-    private function colSum($row){
-        $summOfRow = 0;
-            foreach($row as $el){
-                $summOfRow += $el;
-            }
-        return $summOfRow;
-        
+    protected function result(){
+
+        echo '<table border="3"><tr><th></th><th>B1</th><th>B2</th><th>B3</th><th>B4</th></tr><tr>';
+        $i = 1;
+        foreach($this->game as $row){
+            echo '<td><b>A' . $i . '</b></td>';
+
+            $this->makeRow($row,$i);
+
+            echo '<tr>';
+            $i++;
+        }
+        echo '</tr></table>';
     }
 
     private function maxOfCol(){
         $maxNum = max($this->minRows);
-        $this->maxOf_A_Player = array_search($maxNum, $this->minRows);
+        $this->maxOf_A_Player = array_search($maxNum, $this->minRows) + 1;
     }
 
     public function maximin(){
         foreach ($this->game as $row){
-            $this->minRows[] = $this->colSum($row);
+            $this->minRows[] = min($row);
         }
 
         $this->maxOfCol();
@@ -59,8 +59,5 @@ class Game{
     public function getMinRows(){
         return $this->minRows;
     }
-
-    
-
 
 }
