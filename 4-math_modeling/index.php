@@ -13,6 +13,8 @@ $arr = [
 $game = new Game($arr,1);
 
 $game->maximin();
+
+$game->minimax();
 ?>
 
 
